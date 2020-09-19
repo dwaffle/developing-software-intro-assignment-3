@@ -133,13 +133,24 @@ function accountForWaste(items: number): number {
 }
 
 export function calculateHouseRequirements(
-    widthInFeet: number,
-    lengthInFeet: number
+    widthOfHouse: number,
+    lengthOfHouse: number,
+    isLengthInches: boolean,
+    isWidthInches: boolean
 ) {
-    // convert feet to inches
-    const outerWidthOfHouse = convertFeetToInches(widthInFeet);
-    const outerLengthOfHouse = convertFeetToInches(lengthInFeet);
-
+    let outerWidthOfHouse = 0;
+    let outerLengthOfHouse = 0;
+    //Check to see if our units are already in inches, if not, convert them.
+    if (!isLengthInches) {
+        outerWidthOfHouse = convertFeetToInches(widthOfHouse);
+    } else {
+        outerWidthOfHouse = widthOfHouse;
+    }
+    if (!isWidthInches) {
+        outerLengthOfHouse = convertFeetToInches(lengthOfHouse);
+    } else {
+        outerLengthOfHouse = lengthOfHouse;
+    }
     // calculate the space inbetween corner beams
     const innerWidthOfHouse = outerWidthOfHouse - BEAM_WIDTH * 2;
     const innerLengthOfHouse = outerLengthOfHouse - BEAM_WIDTH * 2;
