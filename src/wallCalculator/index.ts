@@ -141,12 +141,12 @@ export function calculateHouseRequirements(
     let outerWidthOfHouse = 0;
     let outerLengthOfHouse = 0;
     //Check to see if our units are already in inches, if not, convert them.
-    if (!isLengthInches) {
+    if (!isWidthInches) {
         outerWidthOfHouse = convertFeetToInches(widthOfHouse);
     } else {
         outerWidthOfHouse = widthOfHouse;
     }
-    if (!isWidthInches) {
+    if (!isLengthInches) {
         outerLengthOfHouse = convertFeetToInches(lengthOfHouse);
     } else {
         outerLengthOfHouse = lengthOfHouse;
