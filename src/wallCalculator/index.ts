@@ -152,6 +152,6 @@ export function calculateHouseRequirements(
 
     return {
         studs: studs,
-        beams: beams,
+        posts: beams,
     };
 }
