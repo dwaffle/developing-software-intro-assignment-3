@@ -1,3 +1,6 @@
+import { House } from "../house";
+import { Houses } from "../house/houses";
+
 const BEAM_WIDTH = 3.5;
 const BOARD_LENGTH = 8 * 12;
 const WASTE_MULTIPLIER = 0.1;
@@ -137,11 +140,13 @@ export function calculateHouseRequirements(
     widthOfHouse: number,
     lengthOfHouse: number,
     isLengthInches: boolean,
-    isWidthInches: boolean
+    isWidthInches: boolean,
+    nameOfCustomer: string
 ) {
+    console.log(GetHouseNameMatch(nameOfCustomer));
+    const myHouse = Houses.create(nameOfCustomer);
     let outerWidthOfHouse;
     let outerLengthOfHouse;
-
     //Check to see if our units are already in inches, if not, convert them.
     if (!isWidthInches) {
         outerWidthOfHouse = convertFeetToInches(widthOfHouse);
@@ -154,6 +159,9 @@ export function calculateHouseRequirements(
     } else {
         outerLengthOfHouse = lengthOfHouse;
     }
+    myHouse.length = outerLengthOfHouse;
+    myHouse.width = outerWidthOfHouse;
+
     // calculate the space inbetween corner beams
     const innerWidthOfHouse = outerWidthOfHouse - BEAM_WIDTH * 2;
     const innerLengthOfHouse = outerLengthOfHouse - BEAM_WIDTH * 2;
@@ -163,10 +171,17 @@ export function calculateHouseRequirements(
 
     const studs = accountForWaste((wall1.studs + wall2.studs) * 2);
     const beams = accountForWaste((wall1.beams + wall2.beams) * 2 + 4);
-
+    const plates = wall1.plates + wall2.plates;
+    Houses.save(myHouse);
     return {
-        plates: wall1.plates + wall2.plates,
-        studs: studs - (wall1.plates + wall2.plates),
         posts: beams,
+        studs: studs - plates,
+        plates: plates,
     };
+}
+
+function GetHouseNameMatch(nameOfCustomer: string) {
+    const savedHouses = Houses.getAll();
+    const allHouseData = [...savedHouses.values()];
+    return allHouseData.find((element: any) => element.name === nameOfCustomer);
 }
