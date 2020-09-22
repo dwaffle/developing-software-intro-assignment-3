@@ -112,7 +112,7 @@ function getLastSectionSize(inches: number, beams: number) {
     return lastSectionSize;
 }
 
-function buildWall(inches: number) {
+export function buildWall(inches: number) {
     // get required beams
     const requiredBeams = getRequiredBeamsInLength(inches);
     const fullSections = getFullSections(inches, requiredBeams);
@@ -176,8 +176,6 @@ export function calculateHouseRequirements(
     const studs = accountForWaste((wall1.studs + wall2.studs) * 2);
     const posts = accountForWaste((wall1.posts + wall2.posts) * 2 + 4);
     const plates = accountForWaste((wall1.plates + wall2.plates) * 2);
-
-    console.log(myHouse);
     Houses.save(myHouse);
 
     return {
