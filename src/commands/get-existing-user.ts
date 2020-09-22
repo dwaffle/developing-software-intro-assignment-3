@@ -2,11 +2,12 @@ import { Arguments, Argv, string } from "yargs";
 import { getHouseMatch } from "../loadCustomerHouses";
 
 export function getExistingCustomer(yargs: Argv): void {
+    //create a new yargs command.
     yargs.command(
         //Name the command to get the name of the customer
         "getCustomer",
 
-        //Describe the command
+        //Describe the command for the --help flag
         "Gets a house by the customer name, or return that there is no house by that name.",
 
         //Define needed paramaters
