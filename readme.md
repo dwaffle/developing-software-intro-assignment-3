@@ -27,16 +27,26 @@ npm start -- getCustomer --name Bob
 #Commands
 ---
 
-- calc-wood-needed --width --length --inl --inw --name 
-Calculates the wood needed for a house.
-Flags:
--- width: the width of the house.
--- inw: Flag to tell the calculator the width is already in inches.
--- length: the length of the house.
--- inl: Flag to tell the calculator the length is already in inches.
--- name: The name of the customer.  Optional, will assign the name "Testy McTesterson" to any house without a name.
 
--- getCustomer --name nameOfCustomer
+\- calc-wood-needed --width --length --inl --inw --name 
+
+Calculates the wood needed for a house.
+
+Paramaters:
+
+\-- width: the width of the house.
+
+\-- inw: Flag to tell the calculator the width is already in inches.
+
+\-- length: the length of the house.
+
+\-- inl: Flag to tell the calculator the length is already in inches.
+
+\-- name: The name of the customer.  Optional, will assign the name "Testy McTesterson" to any house without a name.
+
+
+\-- getCustomer --name nameOfCustomer
+
 Gets a customer's house by their name.
 
 ##Examples
