@@ -52,10 +52,10 @@ npm start getCustomer --name Jimmy\ Jameson
 ---
 
 |Test Command | Output
-----------------------
-| node dist/index.js calc-wood-needed -w 8 -l 96 --inl | {posts: 5, studs: 31, plates: 16}
-| npm run start -- getCustomer --name Testy\ McTesterson | {widthMaterials: function: 'buildWall', inches: 96, studs: 16, posts 0, plates: 7}
-|                                                         | {lengthMaterials: function: 'buildWall', inches: 96, studs: 16, posts 0, plates: 7}
+|-------------|---------
+| node dist/index.js calc-wood-needed -w 8 -l 96 --inl | {posts: 5, studs: 31, plates: 16} |
+| npm run start -- getCustomer --name Testy\ McTesterson | {widthMaterials: function: 'buildWall', inches: 96, studs: 16, posts 0, plates: 7} |
+|                                                         | {lengthMaterials: function: 'buildWall', inches: 96, studs: 16, posts 0, plates: 7} |
 ----------------------
 
 
