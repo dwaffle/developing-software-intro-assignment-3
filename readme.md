@@ -24,7 +24,7 @@ npm start -- calc-wood-needed --width 8 --length 96 --inl
 npm start -- getCustomer --name Bob
 ```
 
-#Commands
+# Commands
 ---
 
 
@@ -49,7 +49,7 @@ Paramaters:
 
 Gets a customer's house by their name.
 
-##Examples
+## Examples
 
 ```
 npm start calc-wood-needed --width 8 -l 8
@@ -58,7 +58,7 @@ npm start getCustomer --name Bob
 npm start getCustomer --name Jimmy\ Jameson
 ```
 
-#Tests
+# Tests
 ---
 
 |Test Command | Output
@@ -69,12 +69,12 @@ npm start getCustomer --name Jimmy\ Jameson
 ----------------------
 
 
-#Packages used
+# Packages used
 ---
 
 I used [Yargs](https://www.npmjs.com/package/yargs) to parse command line arguments
 
-#Further help
+# Further help
 ---
 
 ```
