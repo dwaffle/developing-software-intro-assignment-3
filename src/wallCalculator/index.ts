@@ -20,7 +20,7 @@ function convertFeetToInches(feet: number) {
 function getPlatesInLength(inches: number) {
     // devide the length by 96 inches (8 feet) and round up
     // multiply by two because we're doing the top and bottom in one calculation
-    return Math.ceil(inches / BOARD_LENGTH) * 3;
+    return Math.ceil(inches / BOARD_LENGTH) * 6;
 }
 
 function getStudsInLength(inches: number) {
@@ -114,21 +114,24 @@ function getLastSectionSize(inches: number, beams: number) {
 
 export function buildWall(inches: number) {
     // get required beams
-    const requiredBeams = getRequiredBeamsInLength(inches);
+    let requiredBeams = getRequiredBeamsInLength(inches);
     const fullSections = getFullSections(inches, requiredBeams);
-    const requiredPlates = getPlatesInLength(inches);
+    let requiredPlates = getPlatesInLength(inches);
     const lastSectionSize = getLastSectionSize(inches, requiredBeams);
-    const studs =
+    let studs =
         getBoardsInLength(FULL_BOARD_SECTION_SIZE) * fullSections +
         getBoardsInLength(lastSectionSize);
-    //Moved multiplcation by 2 to account for both sides of walls.
+    //Accout for waste here.
+    studs = accountForWaste(studs - requiredPlates);
+    requiredBeams = accountForWaste(requiredBeams);
+    requiredPlates = accountForWaste(requiredPlates);
 
     return {
         function: "buildWall",
         inches,
-        studs: studs * 2 - requiredPlates * 2,
+        studs: studs * 2,
         posts: requiredBeams * 2,
-        plates: requiredPlates * 2,
+        plates: requiredPlates,
     };
 }
 
@@ -174,9 +177,9 @@ export function calculateHouseRequirements(
     const wall1 = buildWall(innerWidthOfHouse);
     const wall2 = buildWall(innerLengthOfHouse);
 
-    const studs = wall1.studs + wall2.studs;
-    const posts = wall1.posts + wall2.posts + 4;
-    const plates = wall1.plates + wall2.plates;
+    const studs = accountForWaste(wall1.studs + wall2.studs);
+    const posts = accountForWaste(wall1.posts + wall2.posts + 4);
+    const plates = accountForWaste(wall1.plates + wall2.plates);
     Houses.save(myHouse);
 
     return {
