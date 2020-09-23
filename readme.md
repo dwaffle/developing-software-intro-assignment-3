@@ -1,19 +1,73 @@
-# Focus College ACSD Assignment 3
+# Installation and building
 
-This respository is intended for the use of Focus College Students enrolled in the Advanced Certificate of Software Development located in Kelowna, BC and Surrey, BC.
+```
+npm install
+```
 
+Building the application
+
+```
+tsc
+```
+
+To run the application using Node:
+
+```
+node dist/index.js calc-wood-needed -w 8 -l 8
+node dist/index.js getCustomer --name Bob
+```
+
+To build and run the application using npm:
+
+```
+npm start -- calc-wood-needed --width 8 --length 96 --inl
+npm start -- getCustomer --name Bob
+```
+
+#Commands
 ---
 
-You can remove everything below the above line once you're ready to edit this file.
+- calc-wood-needed --width --length --inl --inw --name 
+Calculates the wood needed for a house.
+Flags:
+-- width: the width of the house.
+-- inw: Flag to tell the calculator the width is already in inches.
+-- length: the length of the house.
+-- inl: Flag to tell the calculator the length is already in inches.
+-- name: The name of the customer.  Optional, will assign the name "Testy McTesterson" to any house without a name.
 
-## Getting Started
+-- getCustomer --name nameOfCustomer
+Gets a customer's house by their name.
 
-Please read the [Assignment Requirements](./assignment/assignment.md).
+##Examples
 
-## Deadline for Submissions
+```
+npm start calc-wood-needed --width 8 -l 8
+npm start calc-wood-needed --width 96 -l 8 --inw
+npm start getCustomer --name Bob
+npm start getCustomer --name Jimmy\ Jameson
+```
 
-The deadline for this assignment is 5PM on THURSDAY SEPTEMBER 24th, 2020.
+#Tests
+---
 
-## Notes
+|Test Command | Output
+----------------------
+| node dist/index.js calc-wood-needed -w 8 -l 96 --inl | {posts: 5, studs: 31, plates: 16}
+| npm run start -- getCustomer --name Testy\ McTesterson | {widthMaterials: function: 'buildWall', inches: 96, studs: 16, posts 0, plates: 7}
+|                                                         | {lengthMaterials: function: 'buildWall', inches: 96, studs: 16, posts 0, plates: 7}
+----------------------
 
-This is a PUBLIC repository attached to your github account and something that you can demonstrate to potential employers. Take care to ensure professionalism for both you and your team's sake. This will be the first entry into your professional portfolio.
+
+#Packages used
+---
+
+I used [Yargs](https://www.npmjs.com/package/yargs) to parse command line arguments
+
+#Further help
+---
+
+```
+npm start -- calc-wood-needed --help
+npm start -- getCustomer --help
+```
