@@ -121,13 +121,14 @@ export function buildWall(inches: number) {
     const studs =
         getBoardsInLength(FULL_BOARD_SECTION_SIZE) * fullSections +
         getBoardsInLength(lastSectionSize);
+    //Moved multiplcation by 2 to account for both sides of walls.
 
     return {
         function: "buildWall",
         inches,
-        studs: studs,
-        posts: requiredBeams,
-        plates: requiredPlates,
+        studs: studs * 2 - requiredPlates * 2,
+        posts: requiredBeams * 2,
+        plates: requiredPlates * 2,
     };
 }
 
@@ -173,14 +174,14 @@ export function calculateHouseRequirements(
     const wall1 = buildWall(innerWidthOfHouse);
     const wall2 = buildWall(innerLengthOfHouse);
 
-    const studs = accountForWaste((wall1.studs + wall2.studs) * 2);
-    const posts = accountForWaste((wall1.posts + wall2.posts) * 2 + 4);
-    const plates = accountForWaste((wall1.plates + wall2.plates) * 2);
+    const studs = wall1.studs + wall2.studs;
+    const posts = wall1.posts + wall2.posts + 4;
+    const plates = wall1.plates + wall2.plates;
     Houses.save(myHouse);
 
     return {
         posts: posts,
-        studs: studs - plates,
+        studs: studs,
         plates: plates,
     };
 }
